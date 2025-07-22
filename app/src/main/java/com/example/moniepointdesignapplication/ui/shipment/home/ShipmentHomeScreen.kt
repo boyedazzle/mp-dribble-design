@@ -57,6 +57,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -180,34 +181,39 @@ fun SearchBar(
         exit = fadeOut(),
         modifier = Modifier.background(Color(0xFF5E2E91))
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-                .background(Color.White, RoundedCornerShape(24.dp))
-                .shadow(2.dp, RoundedCornerShape(24.dp))
-                .padding(horizontal = 16.dp, vertical = 12.dp)
+        Surface(
+            color = Color.Transparent,
+            modifier = Modifier.fillMaxWidth()
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
+            Box(
                 modifier = Modifier
-                    .clickable {
-                        // navigate to custom search item screen
-                        onSearchItemClick()
-                    }
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    .background(Color.White, RoundedCornerShape(24.dp))
+                    .shadow(2.dp, RoundedCornerShape(24.dp))
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
-                Icon(Icons.Default.Search, contentDescription = null, tint = Color.Gray)
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = "Enter the receipt number …",
-                    color = Color.Gray
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                Image(
-                    painter = painterResource(R.drawable.trailing_search_icon),
-                    contentDescription = null,
-                    modifier = Modifier.size(30.dp)
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .clickable {
+                            // navigate to custom search item screen
+                            onSearchItemClick()
+                        }
+                ) {
+                    Icon(Icons.Default.Search, contentDescription = null, tint = Color.Gray)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "Enter the receipt number …",
+                        color = Color.Gray
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+                    Image(
+                        painter = painterResource(R.drawable.trailing_search_icon),
+                        contentDescription = null,
+                        modifier = Modifier.size(30.dp)
+                    )
+                }
             }
         }
     }
@@ -254,6 +260,65 @@ fun TrackingCard() {
             Spacer(modifier = Modifier.height(8.dp))
 
             Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(
+                    modifier = Modifier
+                        .weight(1f) // Take half the width
+                        .padding(end = 8.dp) // Add padding to avoid crowding
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Image(
+                            painter = painterResource(R.drawable.sender),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(30.dp)
+                                .clip(CircleShape)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Column {
+                            Text("Sender", color = Color.Gray)
+                            Text("Atlanta, 5243", fontWeight = FontWeight.Bold)
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Image(
+                            painter = painterResource(R.drawable.receiver),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(30.dp)
+                                .clip(CircleShape)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Column {
+                            Text("Receiver", color = Color.Gray)
+                            Text("Chicago, 6342", fontWeight = FontWeight.Bold)
+                        }
+                    }
+                }
+
+                Column(
+                    modifier = Modifier
+                        .weight(1f) // Take half the width
+                        .padding(start = 8.dp) // Add padding for balance
+                ) {
+                    Text("Time", color = Color.Gray)
+                    Row(
+                        horizontalArrangement = Arrangement.Start, // Align content to start
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text("• ", color = Color.Green, style = TextStyle(fontSize = 24.sp))
+                        Text("2 day - 3 days", fontWeight = FontWeight.Bold)
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text("Status", color = Color.Gray)
+                    Text("Waiting to collect", fontWeight = FontWeight.Bold)
+                }
+            }
+            // inconsistent across screens
+            /*Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -314,7 +379,7 @@ fun TrackingCard() {
                     Text("Status", color = Color.Gray)
                     Text("Waiting to collect", fontWeight = FontWeight.Bold)
                 }
-            }
+            }*/
 
             Spacer(modifier = Modifier.height(8.dp))
             HorizontalDivider(modifier = Modifier.fillMaxWidth())
@@ -441,6 +506,9 @@ fun BottomNavBar(
 }
 
 @Preview
+@Preview(device = Devices.PIXEL_4)
+@Preview(device = Devices.NEXUS_7)
+@Preview(device = Devices.PIXEL_TABLET)
 @Composable
 fun HomeScreenPreview() {
     ShipmentHomeScreen(

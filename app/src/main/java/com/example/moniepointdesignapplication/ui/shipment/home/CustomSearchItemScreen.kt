@@ -18,7 +18,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -44,8 +46,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -296,6 +301,91 @@ fun SearchItem(
 ) {
     Column(
         modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .clickable { onSearchedItemClick() }
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .widthIn(max = 600.dp), // Prevent excessive stretching on large screens
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .sizeIn(minWidth = 36.dp, maxWidth = 48.dp, minHeight = 36.dp, maxHeight = 48.dp) // Adaptive image size
+                    .clip(CircleShape)
+                    .background(Color.LightGray.copy(alpha = 0.1f)) // Optional: subtle background for empty images
+            ) {
+                Image(
+                    painter = painterResource(searchHistory.imageResId),
+                    contentDescription = searchHistory.title,
+                    modifier = Modifier.fillMaxSize(), // Ensure image fills the Box
+                    contentScale = ContentScale.Crop // Prevent distortion
+                )
+            }
+
+            Spacer(modifier = Modifier.width(8.dp)) // Consistent spacing
+
+            Column(
+                modifier = Modifier
+                    .weight(1f) // Take remaining space
+                    .padding(end = 8.dp) // Prevent text from touching edge
+            ) {
+                Text(
+                    text = searchHistory.title,
+                    fontSize = 18.sp,
+                    color = Color.Black,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis // Prevent wrapping
+                )
+                Row(
+                    horizontalArrangement = Arrangement.Start, // Align to start for consistency
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = searchHistory.desc,
+                        fontSize = 14.sp,
+                        color = Color.Gray,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.weight(1f, fill = false) // Allow text to shrink
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = " • ",
+                        fontSize = 14.sp,
+                        color = Color.Gray
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = searchHistory.location,
+                        fontSize = 14.sp,
+                        color = Color.Gray,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.weight(1f, fill = false) // Allow text to shrink
+                    )
+                }
+            }
+        }
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 4.dp, vertical = 8.dp),
+            thickness = 0.5.dp,
+            color = Color.Gray
+        )
+    }
+}
+
+/*@Composable
+fun SearchItem(
+    searchHistory: SearchHistory,
+    onSearchedItemClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
             .padding(8.dp)
             .clickable {
                 onSearchedItemClick()
@@ -355,9 +445,12 @@ fun SearchItem(
             color = Color.Gray
         )
     }
-}
+}*/
 
 @Preview
+@Preview(device = Devices.PIXEL_4)
+@Preview(device = Devices.NEXUS_7)
+@Preview(device = Devices.PIXEL_TABLET)
 @Composable
 fun CustomSearchItemPreview() {
     CustomSearchItemScreen(

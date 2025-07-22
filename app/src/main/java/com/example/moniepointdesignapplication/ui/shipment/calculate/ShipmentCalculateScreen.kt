@@ -15,8 +15,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -43,6 +45,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -58,20 +61,23 @@ fun CalculateShipment(
     Scaffold { innerPadding ->
         Column(
             modifier = Modifier
-                .fillMaxSize().background(Color.White)
+                .fillMaxSize()
+                .background(Color.White)
                 .padding(innerPadding)
+                .verticalScroll(rememberScrollState()) // Enable vertical scrolling
         ) {
             CalculateShipmentTitle(navController)
             Spacer(modifier = Modifier.height(8.dp))
             DestinationInfo()
             PackagingInfo()
             CategoriesInfo()
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.height(16.dp).weight(1f)) // Adjusted for better spacing
             CalculateButton(
                 onCalculateButtonClick = {
                     onCalculateButtonClick()
                 }
             )
+            Spacer(modifier = Modifier.height(16.dp)) // Extra padding at bottom for scroll
         }
     }
 }
@@ -114,12 +120,11 @@ fun DestinationInfo() {
     var receiverLocation by remember { mutableStateOf("") }
     var approxWeight by remember { mutableStateOf("") }
 
-    
     Column(modifier = Modifier.padding(16.dp)) {
         Text(
             text = "Destination",
             fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
+            fontWeight = FontWeight.Bold
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -131,7 +136,7 @@ fun DestinationInfo() {
                     color = Color.White,
                     shape = RoundedCornerShape(16.dp)
                 )
-                .padding(16.dp),
+                .padding(16.dp)
         ) {
             Column(
                 modifier = Modifier.background(color = Color.White)
@@ -280,20 +285,20 @@ fun PackagingInfo() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_box), // Replace with your box icon resource
+                    painter = painterResource(id = R.drawable.ic_box),
                     contentDescription = "Box Icon",
                     modifier = Modifier.size(40.dp).padding(end = 12.dp)
                 )
                 VerticalDivider(
                     modifier = Modifier
-                        .size(width = 1.dp, height = 24.dp) // Adjust height to match text
+                        .size(width = 1.dp, height = 24.dp)
                         .background(Color.Gray)
                 )
                 Text(
                     text = packaging,
                     color = Color(0xFF1A202C),
                     fontSize = 16.sp,
-                    modifier = Modifier.padding(start = 8.dp) // Adjust padding to control spacing
+                    modifier = Modifier.padding(start = 8.dp)
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 IconButton(
@@ -347,7 +352,7 @@ fun CategoriesInfo() {
         Spacer(modifier = Modifier.height(8.dp))
 
         Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp), // Space between buttons
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
@@ -532,11 +537,12 @@ fun CalculateButton(
     onCalculateButtonClick: () -> Unit
 ) {
     Button(
-        onClick = {  onCalculateButtonClick() },
+        onClick = { onCalculateButtonClick() },
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF6AD55)),
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp).padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
+            .height(50.dp)
+            .padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
         shape = RoundedCornerShape(25.dp)
     ) {
         Text("Calculate", color = Color.White, fontSize = 16.sp)
@@ -544,11 +550,13 @@ fun CalculateButton(
 }
 
 @Preview
+@Preview(device = Devices.PIXEL_4)
+@Preview(device = Devices.NEXUS_7)
+@Preview(device = Devices.PIXEL_TABLET)
 @Composable
 fun CalculateShipmentPreview() {
-    val navController = rememberNavController()
     CalculateShipment(
-        navController = navController,
+        navController = rememberNavController(),
         onCalculateButtonClick = {}
     )
 }
