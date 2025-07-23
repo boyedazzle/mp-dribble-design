@@ -59,6 +59,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.moniepointdesignapplication.R
 import com.example.moniepointdesignapplication.modal.SearchHistory
 
+/**
+ * This file is a composable file for creating the delivery application
+ * custom search interface
+ */
 @Composable
 fun CustomSearchItemScreen(
     navController: NavController,
@@ -378,74 +382,6 @@ fun SearchItem(
         )
     }
 }
-
-/*@Composable
-fun SearchItem(
-    searchHistory: SearchHistory,
-    onSearchedItemClick: () -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .padding(8.dp)
-            .clickable {
-                onSearchedItemClick()
-            }
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(CircleShape)
-            ) {
-                Image(
-                    painter = painterResource(searchHistory.imageResId),
-                    contentDescription = searchHistory.title
-                )
-            }
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Column {
-                Text(
-                    text = searchHistory.title,
-                    fontSize = 18.sp,
-                    color = Color.Black
-                )
-                Row(
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = searchHistory.desc,
-                        fontSize = 14.sp,
-                        color = Color.Gray
-                    )
-                    Text(
-                        text = " • ",
-                        fontSize = 14.sp,
-                        color = Color.Gray
-                    )
-                    Text(
-                        text = searchHistory.location,
-                        fontSize = 14.sp,
-                        color = Color.Gray
-                    )
-                }
-            }
-        }
-        Divider(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 4.dp, vertical = 8.dp),
-            thickness = 0.5.dp,
-            color = Color.Gray
-        )
-    }
-}*/
 
 @Preview
 @Preview(device = Devices.PIXEL_4)

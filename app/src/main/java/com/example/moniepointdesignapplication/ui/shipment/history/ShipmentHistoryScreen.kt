@@ -50,6 +50,11 @@ import com.example.moniepointdesignapplication.R
 import com.example.moniepointdesignapplication.modal.CreateShipment
 import com.example.moniepointdesignapplication.modal.Shipment
 
+/**
+ * This is a composable file to display the record of delivery conducted
+ * by the user of the application ranging through several categories including
+ * completed, all, pending, in-progress and cancelled
+ */
 @Composable
 fun ShipmentHistoryScreen(
     navController: NavController

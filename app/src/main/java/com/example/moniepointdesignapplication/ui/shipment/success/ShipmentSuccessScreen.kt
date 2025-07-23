@@ -25,6 +25,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.moniepointdesignapplication.R
 
+/**
+ * This composable file is to display a completion of activity status
+ * for the calculate activity of the application
+ */
 @Composable
 fun ShipmentSuccessScreen(
     onBackToHomeClick: () -> Unit

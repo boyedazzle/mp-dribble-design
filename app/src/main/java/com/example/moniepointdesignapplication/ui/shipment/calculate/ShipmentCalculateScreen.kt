@@ -53,6 +53,10 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.moniepointdesignapplication.R
 
+/**
+ * This file is a composable file to display the contents needed to calculate
+ * the amount of a delivery based on the distance, weight and delivery object type
+ */
 @Composable
 fun CalculateShipment(
     navController: NavController,

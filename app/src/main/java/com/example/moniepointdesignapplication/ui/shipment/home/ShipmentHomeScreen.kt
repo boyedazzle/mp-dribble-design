@@ -63,6 +63,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.moniepointdesignapplication.R
 
+/**
+ * This is a composable file that displays all the aspects of the delivery
+ * tracker application. From the user home page, to history, profile and
+ * the calculator aspect of the app for money prediction purposes
+ */
 @Composable
 fun ShipmentHomeScreen(
     onCalculateClicked: () -> Unit,
@@ -317,69 +322,6 @@ fun TrackingCard() {
                     Text("Waiting to collect", fontWeight = FontWeight.Bold)
                 }
             }
-            // inconsistent across screens
-            /*Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.sender),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(30.dp)
-                                .clip(CircleShape)
-                        )
-
-                        Spacer(modifier = Modifier.width(4.dp))
-
-                        Column {
-                            Text("Sender", color = Color.Gray)
-                            Text("Atlanta, 5243", fontWeight = FontWeight.Bold)
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.receiver),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(30.dp)
-                                .clip(CircleShape)
-                        )
-
-                        Spacer(modifier = Modifier.width(4.dp))
-
-                        Column {
-                            Text("Receiver", color = Color.Gray)
-                            Text("Chicago, 6342", fontWeight = FontWeight.Bold)
-                        }
-                    }
-                }
-
-                Column {
-                    Text("Time", color = Color.Gray)
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text("• ", color = Color.Green, style = TextStyle(fontSize = 24.sp))
-                        Text("2 day - 3 days", fontWeight = FontWeight.Bold)
-                    }
-                    
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    Text("Status", color = Color.Gray)
-                    Text("Waiting to collect", fontWeight = FontWeight.Bold)
-                }
-            }*/
 
             Spacer(modifier = Modifier.height(8.dp))
             HorizontalDivider(modifier = Modifier.fillMaxWidth())
