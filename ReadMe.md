@@ -15,6 +15,14 @@ This annotation generates both light mode (API 29) and dark mode (API 35) previe
 
 but the dark mode is disabled for better user experience right now.
 
+## Design
+
+Below is a link to the design screen https://dribbble.com/shots/21617837-Movemate-Shipments-Mobile-App and the task is to come up
+
+with a mobile translation of the link provided, replicating as much as possible the screens shown in the video, the scroll behaviours, effects
+
+and animations
+
 ## Architecture
 
 This is not primarily the main purpose of this project hence no architectural pattern was adopted
